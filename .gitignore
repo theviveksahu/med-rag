@@ -12,6 +12,10 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/blob-report/
+/tests/fixtures/*.pdf
 
 # next.js
 /.next/
@@ -32,6 +36,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +44,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated pdf.js worker/cmaps (created from node_modules)
+/public/pdfjs/
+
+# private local validation inputs/outputs (never commit)
+/private/
+
+/docs/
+
+/tasks/
+
+AGENTS.md
+

@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Build/test only. Never put real secrets in the workflow.
+      MONGODB_ATLAS_URI: mongodb://127.0.0.1:27017/medrag
+      MONGODB_ATLAS_DB_NAME: medrag
+      MONGODB_ATLAS_COLLECTION_NAME: chunks
+      MONGODB_ATLAS_SESSIONS_COLLECTION_NAME: sessions
+      OPENROUTER_API_KEY: test-key
+      CHAT_MODEL: nvidia/nemotron-3-ultra-550b-a55b:free
+      EMBEDDING_MODEL: nvidia/nemotron-3.5-embed-8b:free
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit and integration tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end happy path
+        run: npm run test:e2e
