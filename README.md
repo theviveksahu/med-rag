@@ -101,7 +101,7 @@ message.
 | `npm run dev`                 | Local dev server                             |
 | `npm run build` / `npm start` | Production build and server                  |
 | `npm run lint`                | ESLint                                       |
-| `npm run typecheck`           | `tsc --noEmit`                               |
+| `npm run typecheck`           | Generate route types + `tsc --noEmit`        |
 | `npm test`                    | Vitest unit/integration tests                |
 | `npm run test:watch`          | Vitest watch mode                            |
 | `npm run test:e2e`            | Playwright happy path (mocks all API routes) |
