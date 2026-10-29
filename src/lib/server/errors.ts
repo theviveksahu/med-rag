@@ -1,6 +1,7 @@
 import "server-only";
 
 import { AppError } from "@/lib/shared/errors";
+import { isRecord } from "@/lib/shared/guards";
 
 /**
  * Turn a provider SDK/fetch error into a safe application error. The raw
@@ -51,10 +52,6 @@ export function mapProviderError(error: unknown): AppError {
   }
 
   return new AppError("INTERNAL", { cause: error });
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
 }
 
 function readStatus(error: unknown): number | undefined {

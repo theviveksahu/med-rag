@@ -8,6 +8,7 @@ import {
 import { toBaseMessages, toUIMessageStream } from "@ai-sdk/langchain";
 
 import { AppError, toErrorPayload } from "@/lib/shared/errors";
+import { isRecord } from "@/lib/shared/guards";
 import { MAX_CHAT_MESSAGES } from "@/lib/shared/limits";
 import { sessionIdSchema } from "@/lib/shared/schemas";
 import type {
@@ -26,14 +27,6 @@ import {
 export const maxDuration = 300;
 
 const MAX_BODY_BYTES = 1_000_000;
-
-interface JsonObject {
-  [key: string]: unknown;
-}
-
-function isRecord(value: unknown): value is JsonObject {
-  return typeof value === "object" && value !== null;
-}
 
 function jsonError(
   error: AppError,

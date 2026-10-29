@@ -99,9 +99,6 @@ export function UploadScreen({ onAnalyze }: UploadScreenProps) {
                   <h2 className="text-sm font-medium text-(--foreground)">
                     Upload a report
                   </h2>
-                  <p className="mt-0.5 text-[11px] text-(--foreground-muted)">
-                    One report per session.
-                  </p>
                 </div>
                 <span className="rounded-full border border-(--border) px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-(--foreground-muted)">
                   PDF

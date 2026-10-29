@@ -1,4 +1,5 @@
 import { ERROR_CATALOG, isAppError } from "@/lib/shared/errors";
+import { isRecord } from "@/lib/shared/guards";
 import type { UploadRequest } from "@/lib/shared/schemas";
 import type { AppErrorData, UploadEvent } from "@/lib/shared/types";
 
@@ -60,10 +61,6 @@ export class ApiError extends Error {
       status: response.status,
     });
   }
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
 }
 
 export function toAppErrorData(error: unknown): AppErrorData {

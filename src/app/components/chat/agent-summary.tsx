@@ -6,11 +6,8 @@ import {
   LoaderCircle,
 } from "lucide-react";
 import { formatShortDuration } from "@/lib/client/format";
+import { isRecord } from "@/lib/shared/guards";
 import type { MessageActivity, ToolActivity } from "./types";
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
-}
 
 function truncate(value: string, maxLength: number): string {
   const normalized = value.replace(/\s+/g, " ").trim();

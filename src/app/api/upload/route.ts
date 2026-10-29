@@ -2,7 +2,6 @@ import { setTimeout as delay } from "node:timers/promises";
 
 import {
   AppError,
-  type ErrorCode,
   isAppError,
   toErrorPayload,
 } from "@/lib/shared/errors";
@@ -50,22 +49,7 @@ interface UploadTarget {
   expiresAt: Date;
 }
 
-function jsonError(
-  code: ErrorCode,
-  requestId: string,
-  message?: string,
-): Response {
-  const error = new AppError(code, { message });
-  return Response.json(toErrorPayload(error, code, requestId), {
-    status: error.status,
-    headers: {
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-    },
-  });
-}
-
-function appErrorResponse(error: AppError, requestId: string): Response {
+function errorResponse(error: AppError, requestId: string): Response {
   return Response.json(toErrorPayload(error, error.code, requestId), {
     status: error.status,
     headers: {
@@ -383,7 +367,7 @@ export async function POST(request: Request): Promise<Response> {
     );
 
     if (!sessionIdResult.success) {
-      return jsonError("INVALID_SESSION_ID", requestId);
+      return errorResponse(new AppError("INVALID_SESSION_ID"), requestId);
     }
 
     const sessionId = sessionIdResult.data;
@@ -395,25 +379,25 @@ export async function POST(request: Request): Promise<Response> {
         Number.isFinite(declaredBytes) &&
         declaredBytes > MAX_BODY_BYTES
       ) {
-        return jsonError("PAYLOAD_TOO_LARGE", requestId);
+        return errorResponse(new AppError("PAYLOAD_TOO_LARGE"), requestId);
       }
     }
 
     const body = await readBodyWithLimit(request);
     if (!body.ok) {
-      return jsonError("PAYLOAD_TOO_LARGE", requestId);
+      return errorResponse(new AppError("PAYLOAD_TOO_LARGE"), requestId);
     }
 
     let payload: unknown;
     try {
       payload = JSON.parse(body.text);
     } catch {
-      return jsonError("INVALID_PAYLOAD", requestId);
+      return errorResponse(new AppError("INVALID_PAYLOAD"), requestId);
     }
 
     const parsed = uploadRequestSchema.safeParse(payload);
     if (!parsed.success) {
-      return jsonError("INVALID_PAYLOAD", requestId);
+      return errorResponse(new AppError("INVALID_PAYLOAD"), requestId);
     }
 
     const input = parsed.data;
@@ -476,6 +460,6 @@ export async function POST(request: Request): Promise<Response> {
       });
     }
 
-    return appErrorResponse(appError, requestId);
+    return errorResponse(appError, requestId);
   }
 }
