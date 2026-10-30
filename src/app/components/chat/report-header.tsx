@@ -13,9 +13,6 @@ interface ReportHeaderProps {
 const actionClass =
   "rounded-md border border-(--border) bg-(--surface-raised) px-2.5 py-1.5 font-medium text-(--foreground-secondary) transition-colors hover:border-(--accent) hover:text-(--foreground) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--background-secondary)";
 
-const textActionClass =
-  "rounded-sm px-1 py-1 text-(--foreground-muted) underline-offset-4 transition-colors hover:text-(--foreground) hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent)";
-
 export function ReportHeader({ report, onRequestReset }: ReportHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -67,13 +64,6 @@ export function ReportHeader({ report, onRequestReset }: ReportHeaderProps) {
         <button type="button" onClick={requestReset} className={actionClass}>
           Analyze another
         </button>
-        <button
-          type="button"
-          onClick={requestReset}
-          className={textActionClass}
-        >
-          New session
-        </button>
       </div>
 
       <div ref={menuRef} className="relative shrink-0 sm:hidden">
@@ -100,14 +90,6 @@ export function ReportHeader({ report, onRequestReset }: ReportHeaderProps) {
               className="block w-full px-3 py-2 text-left text-xs text-(--foreground-secondary) transition-colors hover:bg-(--surface-soft) hover:text-(--foreground) focus-visible:bg-(--surface-soft) focus-visible:outline-none"
             >
               Analyze another
-            </button>
-            <button
-              type="button"
-              role="menuitem"
-              onClick={requestReset}
-              className="block w-full px-3 py-2 text-left text-xs text-(--foreground-secondary) transition-colors hover:bg-(--surface-soft) hover:text-(--foreground) focus-visible:bg-(--surface-soft) focus-visible:outline-none"
-            >
-              New session
             </button>
           </div>
         )}

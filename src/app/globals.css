@@ -209,6 +209,132 @@ code {
   border: 1px solid rgba(240, 138, 126, 0.32);
 }
 
+/* Markdown answer typography (assistant messages) */
+.rich-text {
+  color: var(--foreground-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+.rich-text > * + * {
+  margin-top: 0.75rem;
+}
+
+.rich-text h1,
+.rich-text h2,
+.rich-text h3,
+.rich-text h4,
+.rich-text h5,
+.rich-text h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.rich-text h1 {
+  font-size: 1.6rem;
+}
+
+.rich-text h2 {
+  font-size: 1.3rem;
+}
+
+.rich-text h3 {
+  font-size: 1.15rem;
+}
+
+.rich-text h4,
+.rich-text h5,
+.rich-text h6 {
+  font-size: 1rem;
+}
+
+.rich-text strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.rich-text em {
+  font-style: italic;
+}
+
+.rich-text del {
+  color: var(--foreground-muted);
+  text-decoration: line-through;
+}
+
+.rich-text ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.rich-text ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+
+.rich-text li + li {
+  margin-top: 0.25rem;
+}
+
+.rich-text li::marker {
+  color: var(--accent);
+}
+
+.rich-text blockquote {
+  border-left: 2px solid var(--accent);
+  background: var(--surface-soft);
+  padding: 0.5rem 0.9rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.rich-text hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+.rich-text pre {
+  background: var(--background-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+.rich-text pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.85em;
+}
+
+.rich-text table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.rich-text thead th {
+  background: var(--surface-soft);
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.rich-text th,
+.rich-text td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.rich-text tbody tr:nth-child(even) {
+  background: rgba(216, 162, 94, 0.05);
+}
+
 /* Gradient border effect */
 .gradient-border {
   position: relative;

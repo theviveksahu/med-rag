@@ -225,7 +225,7 @@ export function ChatScreen({
         {messages.length === 0 && !awaitingAssistant ? (
           <EmptyChat onSelect={send} disabled={blocked} />
         ) : (
-          <div className="mx-auto w-full max-w-[820px] space-y-7 px-4 py-6 sm:px-6 sm:py-8">
+          <div className="mx-auto w-full max-w-205 space-y-7 px-4 py-6 sm:px-6 sm:py-8">
             {messages.map((message) => (
               <ChatMessage
                 key={message.id}
@@ -245,13 +245,13 @@ export function ChatScreen({
       </div>
 
       <div className="shrink-0 border-t border-(--border) bg-(--background-secondary) pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <div className="mx-auto w-full max-w-[820px] px-4 pt-3 sm:px-6">
+        <div className="mx-auto w-full max-w-205 px-4 pt-3 sm:px-6">
           {chatError && !blocked && (
             <AppErrorBanner error={chatError} onRetry={handleRetry} />
           )}
         </div>
 
-        <div className="mx-auto w-full max-w-[820px] px-4 pt-3 sm:px-6">
+        <div className="mx-auto w-full max-w-205 px-4 pt-3 sm:px-6">
           {blocked && chatError ? (
             <BlockedComposer
               error={chatError}

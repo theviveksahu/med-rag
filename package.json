@@ -37,6 +37,8 @@
     "postcss": "^8.5.31",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
     "tsx": "^4.23.15",
     "ws": "^8.22.0",

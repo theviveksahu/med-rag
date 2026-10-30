@@ -127,11 +127,15 @@ export function ChatMessage({
       )}
 
       {showAnswer && (
-        <div className="max-w-[72ch]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-(--accent)">
+        <div className="max-w-[72ch] rounded-xl border border-(--border) bg-(--surface-raised) p-4 sm:p-5">
+          <p className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-(--accent)">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-(--accent)"
+            />
             From your report
           </p>
-          <div className="mt-2 space-y-4 text-[15px] leading-7 text-(--foreground-secondary)">
+          <div className="mt-3">
             {textParts.map((part, index) =>
               part.text.trim() ? (
                 <RichText key={`${message.id}-text-${index}`} text={part.text} />
